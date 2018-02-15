@@ -17,7 +17,7 @@ class Gear(models.Model):
 
     rfid = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=50)
-    status_choices = [
+    status_choices = [      # Track the status of any piece of gear to determine where and how it should be used
         (0, "In Stock"),        # Ready and available in the gear sheds, waiting to be used
         (1, "Checked Out"),     # Somebody has it right now, but it should soon be available again
         (2, "Broken"),          # It is broken to the point it should not be checked out, waiting for repair
@@ -30,6 +30,9 @@ class Gear(models.Model):
 
     #: The department to which this gear belongs (roughly corresponds to STL positions)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
+
+    #: A picture of the piece of gear for easy visual identification
+    picture = models.ImageField(upload_to="GearPics/", null=True)
 
     #: All the certifications that a member must posses to be allowed to check out this gear
     min_required_certs = models.ManyToManyField(Certification, verbose_name="Minimal Certifications Required for Rental")
