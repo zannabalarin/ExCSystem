@@ -47,6 +47,8 @@ class MemberAdmin(BaseUserAdmin):
         urls = super().get_urls()
         info = self.model._meta.app_label, self.model._meta.model_name
 
+        # Testing asdasdasdasd
+
         # Setup all the additional urls we want
         my_urls = [
             path('<int:pk>/detail/', wrap(MemberDetailView.as_view()), name='%s_%s_detail' % info),
